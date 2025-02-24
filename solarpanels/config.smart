@@ -1,0 +1,8 @@
+[init]
+sunrise = data/sunrissunsetComp.csv
+base_folder = /mnt/solar/
+base_file = <date>-solar.csv
+sum_file = <year>-solar.csv
+zip_file = <year>-solar.zip
+debug = /tmp/debug-solar.txt
+

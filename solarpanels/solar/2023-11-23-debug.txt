@@ -1,0 +1,1 @@
+2023-11-23 16:43:25,solfile = C:\Users\johan\OneDrive\Documenten\Python\solarpanels\solar\2023-11-23-solar.csv

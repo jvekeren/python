@@ -1,0 +1,6 @@
+[init]
+base_folder = /mnt/smartmeter
+base_file = <date>-smart.csv
+sum_file = <year>-smart.csv
+zip_file = <year>-smart.zip
+debug = /tmp/debug-smart.txt

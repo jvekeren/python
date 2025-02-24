@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header-box, .table-box, .footer-box {
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header img {
+            max-width: 600px;
+        }
+        .info {
+            margin-bottom: 20px;
+        }
+        .info div {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 12px; /* Smaller font size */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        th:nth-child(2), td:nth-child(2) {
+            width: 70px; /* Set width for the second column */
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .filter-buttons, .action-buttons {
+            display: flex;
+        }
+        .filter-buttons button, .action-buttons button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .filter-buttons button:hover, .action-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .filter-buttons button.active {
+            background-color: #0056b3;
+        }
+        .failed-row {
+        background-color: #f8d7da; /* Highlight failed rows in light red */
+        }
+        @media print {
+            .failed-row {
+                background-color: #f8d7da !important; /* Ensure the background color is applied when printing */
+                -webkit-print-color-adjust: exact; /* Ensure colors are printed correctly */
+                print-color-adjust: exact; /* Ensure colors are printed correctly */
+            }
+            body {
+                margin: 0;
+                background-color: #ffffff;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                transform: scale(1); /* Scale content to 80% */
+                transform-origin: top left; /* Ensure scaling starts from the top left */
+            }
+            .header-box, .table-box, .footer-box {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+            .buttons-container {
+                display: flex; /* Ensure buttons are visible when printing */
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+            .filter-buttons button, .action-buttons button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                text-align: center;
+                padding: 10px 20px;
+                margin-right: 10px;
+                display: inline-block;
+                text-decoration: none;
+                font-size: 14px;
+                -webkit-print-color-adjust: exact; /* Ensure colors are printed correctly */
+            }
+            .test-status {
+                padding: 10px;
+                color: white;
+                text-align: center;
+                border-radius: 4px;
+                font-size: 16px;
+                font-weight: bold;
+                display: inline-block;
+                -webkit-print-color-adjust: exact; /* Ensure colors are printed correctly */
+            }
+            .test-passed {
+                background-color: green;
+            }
+            .test-failed {
+                background-color: red;
+            }
+         
+        }
+        .footer-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .footer-box .summary-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .footer-box .summary-details {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-box .test-status-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .footer-box .test-status {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .footer-box .test-passed {
+            background-color: green;
+        }
+        .footer-box .test-failed {
+            background-color: red;
+        }
+    </style>
+    <script>
+
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+            location.reload();
+            }
+        });
+
+        async function saveAsReport() {
+        try {
+            const options = {
+                types: [{
+                    description: 'HTML Files',
+                    accept: {'text/html': ['.html']},
+                }],
+            };
+            const handle = await window.showSaveFilePicker(options);
+            const writable = await handle.createWritable();
+            await writable.write(new Blob([document.documentElement.outerHTML], { type: 'text/html' }));
+            await writable.close();
+        } catch (err) {
+            console.error('Save As operation failed:', err);
+        }
+    }
+        function filterResults(status) {
+            var rows = document.querySelectorAll('tbody tr');
+            rows.forEach(function(row) {
+                if (status === 'ALL' || row.dataset.status === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Highlight the active button
+            var buttons = document.querySelectorAll('.filter-buttons button');
+            buttons.forEach(function(button) {
+                if (button.textContent.toUpperCase().includes(status)) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function printReport() {
+            window.print();
+        }
+
+        function shareReport() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Test Report',
+                    text: 'Check out this test report.',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                alert('Web Share API is not supported in your browser.');
+            }
+        }
+
+        // Set default filter to 'ALL' on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            filterResults('ALL');
+        });
+        
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-box">
+            <header>
+                <img src="C:\ABI\media\logo.jpg" alt="Company Logo">
+                <h2>PCB Test Report</h2>
+            </header>
+            <div>Operator Name: update3</div><div>Date: 12/08/2024</div><div>Time: 13:27:57</div><div>Board Name: XE-GIB1</div><div>Board Serial Number: 076</div><div>Testflow Name: XE-GIB1D-2.tfl</div>
+        </div>
+        <div class="table-box">
+            <div class="buttons-container">
+                <div class="filter-buttons">
+                    <button onclick="filterResults('ALL')">Show All</button>
+                    <button onclick="filterResults('PASS')">Show Pass</button>
+                    <button onclick="filterResults('FAIL')">Show Fail</button>
+                </div>
+                <div class="action-buttons">
+                    <button onclick="saveAsReport()">Save As</button>
+                    <button onclick="printReport()">Print</button>
+                    <button onclick="shareReport()">Share</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th><th>Time</th><th>Source</th><th>Script</th><th>Status</th><th>Test Name</th><th>Instrument</th><th>Low limit</th><th>Value</th><th>Top limit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-status="PASS"><td>12/08/2024</td><td>14:52:26</td><td>ABI</td><td>USR1</td><td>PASS</td><td>INIT</td><td>GIB TOP Board found</td></tr><tr class="failed-row" data-status="FAIL"><td>12/08/2024</td><td>14:52:37</td><td>ABI</td><td>USR1</td><td>FAIL</td><td>POWER_SUPPLY_CHECK</td><td>PPS1: </td><td>0.042</td><td>0.039</td><td>0.182</td></tr><tr data-status="PASS"><td>12/08/2024</td><td>14:52:40</td><td>ABI</td><td>USR1</td><td>PASS</td><td>POWER_SUPPLY_CHECK</td><td>PPS2: </td><td>0.15</td><td>0.178</td><td>0.19</td></tr><tr data-status="PASS"><td>12/08/2024</td><td>14:52:42</td><td>ABI</td><td>USR1</td><td>PASS</td><td>POWER_SUPPLY_CHECK</td><td>PPS3: </td><td>0.13</td><td>0.196</td><td>0.21</td></tr><tr class="failed-row" data-status="FAIL"><td>12/08/2024</td><td>14:52:47</td><td>ABI</td><td>TFL </td><td>FAIL</td><td>POWER_SUPPLY_CHECK</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-box">
+            <div class="summary-details">
+                <div class="summary-header">Test Summary</div>
+                <div>Test passed: 3</div>
+                <div>Test failed: 2</div>
+                <div>Total steps: 5</div>
+                <div>Test duration: 0 days, 0 hours, 0 minutes</div>
+            </div>
+            <div class="test-status-container">
+                <div class="test-status test-failed">Failed</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

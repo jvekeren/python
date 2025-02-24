@@ -1,0 +1,27 @@
+Operator Name, John Doe, Date,8/08/2024, Time, 12:23:45, Board Name, XE-GIB1D, Board Serial Number, 123,python test, passed, Spare value, oke oke 
+"Date","Time","Source","Script",Status,"Test Name","Instrument","Low limit","Value","Top limit"
+"8/08/2024","13:23:30","ABI","USR1","PASS","INIT","C drive!!"
+"9/08/2024","13:24:26","ABI","USR1","PASS","POWER_SUPPLY_CHECK","PPS1: ",0.042,0.037,0.182
+"9/08/2024","13:24:29","ABI","USR1","PASS","POWER_SUPPLY_CHECK","PPS2: ",0.15,0.177,0.19
+"9/08/2024","13:24:31","ABI","USR1","PASS","POWER_SUPPLY_CHECK","PPS3: ",0.13,0.195,0.21
+"9/08/2024","13:24:36","ABI","TFL ","PASS","POWER_SUPPLY_CHECK",External,1,2,3
+"9/08/2024","13:24:46","ABI","TFL ","PASS","6.1.1 +8V.REF ","REF",7.5,7.906,8.5
+"9/08/2024","13:24:46","ABI","TFL ","PASS","6.1.1 +8V.REF ","REF",4.8,0.0041,5.2
+"9/08/2024","13:24:53","ABI","TFL ","PASS","6.1.2 +8VREF","REF",7.9,7.913,7.94
+"9/08/2024","13:24:59","ABI","TFL ","PASS","6.2.1 2MHz CLK","REF",11.4,11.946,12.6
+"9/08/2024","13:25:05","ABI","TFL ","PASS","6.2.2 2MHz CLK","REF",-0.02,11.946,0.02
+"9/08/2024","13:25:11","ABI","TFL ","PASS","6.2.3 2MHz CLK","REF",11.4,11.946,12.6
+"9/08/2024","13:24:53","ABI","TFL ","PASS","6.1.2 +8VREF","REF",7.9,7.913,7.94
+"9/08/2024","13:24:59","ABI","TFL ","PASS","6.2.1 2MHz CLK","REF",11.4,11.946,12.6
+"9/08/2024","13:25:05","ABI","TFL ","FAIL","6.2.2 2MHz CLK","REF",-0.02,11.946,0.02
+"9/08/2024","13:25:11","ABI","TFL ","PASS","6.2.3 2MHz CLK","REF",11.4,11.946,12.6
+"9/08/2024","13:24:53","ABI","TFL ","PASS","6.1.2 +8VREF","REF",7.9,7.913,7.94
+"9/08/2024","13:24:59","ABI","TFL ","FAIL","6.2.1 2MHz CLK","REF",11.4,11.946,12.6
+"9/08/2024","13:25:05","ABI","TFL ","PASS","6.2.2 2MHz CLK","REF",-0.02,11.946,0.02
+"9/08/2024","13:25:11","ABI","TFL ","PASS","6.2.3 2MHz CLK","REF",11.4,11.946,12.6
+"9/08/2024","13:25:16","ABI","USR2","PASS","6.3 Powerup ","DSO1 POSWIDTH",0.02,0.023901,0.2
+"9/08/2024","13:25:17","ABI","USR3","PASS","6.3 Powerup ","User confirm:","TRUE",,
+"9/08/2024","13:25:28","ABI","TFL ","PASS","6.4.1 Input IU",3.98,,4.001,4.02
+"9/08/2024","18:25:40","ABI","TFL ","PASS","6.4.2 Input IV",3.98,,4.005,4.02
+"9/08/2024","15:07:32","ABI","TFL ","PASS","6.1.1 +8V.REF ",7.5,7.906,8.5
+"9/08/2024","15:07:32","ABI","TFL ","FAIL","6.1.1 +8V.REF ",4.8,0.0033,5.2
